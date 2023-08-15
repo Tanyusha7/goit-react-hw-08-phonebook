@@ -3,7 +3,7 @@ import Layout from './Layout/Layout';
 import RegisterForm from '../pages/RegisterForm';
 import LoginForm from '../pages/LoginForm';
 import Contacts from 'pages/contacts';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getCurrentUser } from 'redux/auth/auth_operations';
 // import { selectToken } from 'redux/auth/auth_selectors';
