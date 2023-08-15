@@ -2,12 +2,16 @@ import { Container } from 'components/Container/Container.styled';
 import { Button, Form, Input, Label } from 'components/Form/Form.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/auth_operations';
+import { useNavigate } from 'react-router-dom';
+import { getCurrentUser, logIn } from 'redux/auth/auth_operations';
+// import { selectAuth } from 'redux/auth/auth_selectors';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  // const isAuth = useSelector(selectAuth);
+  const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -24,7 +28,13 @@ const LoginForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(logIn({ email, password }));
+    dispatch(logIn({ email, password }))
+      .unwrap()
+      .then(() => {
+        dispatch(getCurrentUser());
+        navigate('/contacts');
+      })
+      .catch(error => alert(error));
 
     setEmail('');
     setPassword('');

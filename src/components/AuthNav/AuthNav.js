@@ -5,7 +5,7 @@ const AuthNav = () => {
   return (
     <>
       <NavHeader to="/">Register</NavHeader>
-      <NavHeader to="login">Login</NavHeader>
+      <NavHeader to="/login">Login</NavHeader>
     </>
   );
 };

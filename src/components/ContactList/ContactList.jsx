@@ -21,7 +21,7 @@ export const ContactList = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const contacts = useSelector(selectContacts);
-  console.log(contacts);
+
   const visibleContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
 
