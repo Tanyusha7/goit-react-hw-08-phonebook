@@ -14,19 +14,25 @@ export const Nav = styled.nav`
 `;
 
 export const NavHeader = styled(NavLink)`
-  color: darkblue;
+  color: #e2e2ef;
   &.active {
-    color: blue;
+    color: #bef9fb;
   }
 `;
 
 export const Ul = styled.div`
   display: flex;
+  justify-content: space-around;
   gap: 20px;
   width: 100%;
-  padding: 20px;
   font-size: 24px;
   font-weight: 600;
-  text-transform: uppercase;
+
   align-items: center;
+`;
+export const Div = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  width: 200px;
 `;

@@ -13,9 +13,10 @@ const handlePending = state => {
   state.isLoading = true;
 };
 
-const handleError = (state, { payload }) => {
+const handleError = (state, action) => {
   state.isLoading = false;
-  state.error = payload;
+  state.error = action.payload;
+  // console.log(action.payload);
 };
 
 const handleFulfilledSignUp = (state, { payload }) => {

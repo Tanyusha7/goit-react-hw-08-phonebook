@@ -23,7 +23,7 @@ export const ContactItem = styled.li`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 40px;
   list-style: inside;
 `;
 

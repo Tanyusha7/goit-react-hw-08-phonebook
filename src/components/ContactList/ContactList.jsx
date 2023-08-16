@@ -7,15 +7,19 @@ import {
 } from 'redux/phoneBook/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import {
-  List,
-  ContactItem,
-  BtnDeleteContact,
-  MarkerOfList,
-  SearchText,
-} from './ContactList.styled';
+import { SearchText } from './ContactList.styled';
 import { fetchContacts } from 'redux/phoneBook/operations';
-import { InfinitySpin } from 'react-loader-spinner';
+
+import Button from '@mui/material/Button';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { Alert, LinearProgress } from '@mui/material';
 
 export const ContactList = () => {
   const isLoading = useSelector(selectIsLoading);
@@ -31,26 +35,60 @@ export const ContactList = () => {
 
   return (
     <List>
-      {isLoading && <InfinitySpin width="200" color="#4905e8" />}
+      {isLoading && <LinearProgress color="primary" />}
       {error && <SearchText>{error}</SearchText>}
       {contacts.length === 0 ? (
-        <SearchText>You don't have any contacts yet!</SearchText>
+        <Alert
+          severity="info"
+          sx={{ width: '30%', marginLeft: '40px', marginTop: '20px' }}
+        >
+          You don't have any contacts yet!
+        </Alert>
       ) : visibleContacts.length === 0 ? (
-        <SearchText> We didn't find any contact</SearchText>
+        <Alert
+          severity="info"
+          sx={{ width: '30%', marginLeft: '40px', marginTop: '20px' }}
+        >
+          We didn't find any contact
+        </Alert>
       ) : (
         visibleContacts.map(({ id, name, number }) => {
           return (
-            <ContactItem key={id}>
-              <MarkerOfList></MarkerOfList>
-              <p>{name}: </p>
-              <p>{number}</p>
-              <BtnDeleteContact
-                type="button"
-                onClick={() => dispatch(deleteContact(id))}
-              >
-                Delete
-              </BtnDeleteContact>
-            </ContactItem>
+            <List
+              key={id}
+              sx={{
+                display: 'flex',
+
+                justifyContent: 'space-between',
+                alignItems: 'center',
+
+                marginLeft: '40px',
+                width: '100%',
+                maxWidth: 450,
+                bgcolor: '#eeeeee',
+              }}
+            >
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar>
+                    <PersonAddIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={name} secondary={number} />
+                <Button
+                  sx={{
+                    width: '150px',
+                    padding: '8px',
+                    cursor: 'pointer',
+                  }}
+                  variant="outlined"
+                  startIcon={<DeleteForeverIcon />}
+                  onClick={() => dispatch(deleteContact(id))}
+                >
+                  Delete
+                </Button>
+              </ListItem>
+            </List>
           );
         })
       )}

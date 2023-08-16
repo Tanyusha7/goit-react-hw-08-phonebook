@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { visibleContacts } from 'redux/phoneBook/filterSlice';
 import { selectFilterValue } from 'redux/phoneBook/selectors';
 
-import { FilterTitle, FilterSearch } from './Filter.styled';
+import { FilterTitle } from './Filter.styled';
+import { TextField } from '@mui/material';
 
 export const Filter = () => {
   const value = useSelector(selectFilterValue);
@@ -16,7 +17,15 @@ export const Filter = () => {
     <>
       <FilterTitle>
         Find contacts by name
-        <FilterSearch type="text" value={value} onChange={onFilter} />
+        <TextField
+          id="outlined-basic"
+          label="Enter a name"
+          variant="outlined"
+          type="text"
+          required
+          value={value}
+          onChange={onFilter}
+        />
       </FilterTitle>
     </>
   );

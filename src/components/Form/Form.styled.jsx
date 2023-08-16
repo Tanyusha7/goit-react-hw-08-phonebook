@@ -3,10 +3,13 @@ import styled from '@emotion/styled';
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 6px;
   row-gap: 15px;
-  width: 300px;
+  width: 100%;
   font-size: 18px;
+  margin-top: 40px;
 `;
 export const Label = styled.label`
   display: flex;

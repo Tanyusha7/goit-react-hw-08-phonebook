@@ -1,8 +1,10 @@
+import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { Container } from 'components/Container/Container.styled';
-import { Form, Input, Label, Button } from 'components/Form/Form.styled';
+import { Form, Label } from 'components/Form/Form.styled';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signUp } from 'redux/auth/auth_operations';
+import { selectAuthError } from 'redux/auth/auth_selectors';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -10,6 +12,22 @@ export const RegisterForm = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
+  const error = useSelector(selectAuthError);
+
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = newState => () => {
+    setState({ ...newState, open: true });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -37,38 +55,94 @@ export const RegisterForm = () => {
 
   return (
     <Container>
+      {error ? (
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={handleClose}
+          message={error}
+          key={vertical + horizontal}
+        >
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            {error}!
+          </Alert>
+        </Snackbar>
+      ) : (
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={handleClose}
+          message={error}
+          key={vertical + horizontal}
+        >
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: '100%' }}
+          >
+            Success{name}! You have created an account.
+          </Alert>
+        </Snackbar>
+      )}
       <Form onSubmit={handleSubmit}>
         <Label>
           Name
-          <Input
+          <TextField
+            sx={{
+              background: '#fff9f9',
+            }}
             type="text"
             name="name"
             value={name}
             onChange={handleChange}
             autoComplete="off"
+            id="outlined-textarea"
+            label="name"
+            multiline
           />
         </Label>
         <Label>
           Email
-          <Input
+          <TextField
+            sx={{
+              background: '#fff9f9',
+            }}
             type="email"
             name="email"
             value={email}
             onChange={handleChange}
             autoComplete="off"
+            id="outlined-textarea"
+            label="rty@email.com"
+            multiline
           />
         </Label>
         <Label>
           Password
-          <Input
+          <TextField
+            sx={{
+              background: '#fff9f9',
+            }}
             type="password"
             name="password"
             value={password}
             onChange={handleChange}
             autoComplete="off"
+            id="outlined-textarea"
+            label="********"
           />
         </Label>
-        <Button type="submit">Register</Button>
+        <Button
+          sx={{
+            width: '200px',
+            padding: '10px',
+          }}
+          type="submit"
+          variant="contained"
+          onClick={handleClick({ vertical: 'top', horizontal: 'right' })}
+        >
+          Register
+        </Button>
       </Form>
     </Container>
   );
