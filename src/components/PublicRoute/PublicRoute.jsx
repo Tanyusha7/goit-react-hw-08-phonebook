@@ -6,7 +6,7 @@ const PublicRoute = ({ children }) => {
   const isToken = useSelector(selectToken);
   const { state } = useLocation();
 
-  return !isToken ? children : <Navigate to={state ? state : '/'} />;
+  return !isToken ? children : <Navigate to={state ? 'state' : '/'} />;
 };
 
 export default PublicRoute;

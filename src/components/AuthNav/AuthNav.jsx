@@ -1,5 +1,4 @@
 import { NavHeader } from 'components/Header/Header.styled';
-import React from 'react';
 
 const AuthNav = () => {
   return (

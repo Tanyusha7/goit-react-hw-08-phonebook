@@ -15,6 +15,7 @@ const handlePending = state => {
 const handleError = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
+  console.log(payload);
 };
 
 const handleFulfilledGet = (state, { payload }) => {

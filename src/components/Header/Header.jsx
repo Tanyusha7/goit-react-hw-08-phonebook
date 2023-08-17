@@ -18,7 +18,7 @@ const Header = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Ul>
-            <NavHeader to="/contacts">Contacts</NavHeader>
+            <NavHeader to="/contacts">Contact</NavHeader>
             <Div>{isAuth ? <UserMenu /> : <AuthNav />}</Div>
           </Ul>
         </Toolbar>

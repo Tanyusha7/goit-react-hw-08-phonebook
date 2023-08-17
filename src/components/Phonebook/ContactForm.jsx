@@ -14,11 +14,12 @@ export const ContactForm = () => {
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  // const [isContact, setIsContact] = useState(false);
 
   const [state, setState] = useState({
     open: false,
     vertical: 'top',
-    horizontal: 'center',
+    horizontal: 'left',
   });
   const { vertical, horizontal, open } = state;
 
@@ -28,6 +29,8 @@ export const ContactForm = () => {
 
   const handleClose = () => {
     setState({ ...state, open: false });
+    setName('');
+    setNumber('');
   };
 
   const handleChange = ({ target: { name, value } }) => {
@@ -44,34 +47,31 @@ export const ContactForm = () => {
         break;
     }
   };
-
   const isExist = contacts.find(contact => {
     return (
       contact.name.toLocaleLowerCase() === name.toLocaleLowerCase() ||
       contact.number === number
     );
   });
-
   const handleSubmit = e => {
     e.preventDefault();
 
     if (isExist) {
-      setName('');
-      setNumber('');
+      // setIsContact(true);
 
       return;
     }
-
+    // setIsContact(false);
     const contact = {
       name: name,
       number: number,
     };
 
+    dispatch(addContact(contact));
     setName('');
     setNumber('');
-    dispatch(addContact(contact));
   };
-  // console.log(isExist, name);
+
   return (
     <>
       {isExist && (

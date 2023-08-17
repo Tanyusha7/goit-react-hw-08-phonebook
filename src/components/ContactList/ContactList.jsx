@@ -7,7 +7,6 @@ import {
 } from 'redux/phoneBook/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { SearchText } from './ContactList.styled';
 import { fetchContacts } from 'redux/phoneBook/operations';
 
 import Button from '@mui/material/Button';
@@ -20,23 +19,37 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Alert, LinearProgress } from '@mui/material';
+import { selectToken } from 'redux/auth/auth_selectors';
+import { useNavigate } from 'react-router-dom';
 
 export const ContactList = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const contacts = useSelector(selectContacts);
+  const isToken = useSelector(selectToken);
+  const navigate = useNavigate();
 
   const visibleContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!isToken) {
+      navigate('/login');
+    }
     dispatch(fetchContacts());
-  }, [dispatch]);
+  }, [dispatch, isToken, navigate]);
 
   return (
     <List>
       {isLoading && <LinearProgress color="primary" />}
-      {error && <SearchText>{error}</SearchText>}
+      {error && (
+        <Alert
+          severity="error"
+          sx={{ width: '30%', marginLeft: '40px', marginTop: '20px' }}
+        >
+          {error}!
+        </Alert>
+      )}
       {contacts.length === 0 ? (
         <Alert
           severity="info"
@@ -61,7 +74,7 @@ export const ContactList = () => {
 
                 justifyContent: 'space-between',
                 alignItems: 'center',
-
+                marginTop: '6px',
                 marginLeft: '40px',
                 width: '100%',
                 maxWidth: 450,

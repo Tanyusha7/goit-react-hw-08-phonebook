@@ -24,7 +24,7 @@ export const RegisterForm = () => {
   const [state, setState] = useState({
     open: false,
     vertical: 'top',
-    horizontal: 'center',
+    horizontal: 'left',
   });
   const { vertical, horizontal, open } = state;
 
