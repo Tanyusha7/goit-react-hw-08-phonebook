@@ -1,11 +1,17 @@
-import { Alert, Button, Snackbar, TextField } from '@mui/material';
+import {
+  Alert,
+  Button,
+  LinearProgress,
+  Snackbar,
+  TextField,
+} from '@mui/material';
 import { Container } from 'components/Container/Container.styled';
 import { Form, Label } from 'components/Form/Form.styled';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, logIn } from 'redux/auth/auth_operations';
-import { selectAuthError } from 'redux/auth/auth_selectors';
+import { selectAuthError, selectAuthLoading } from 'redux/auth/auth_selectors';
 // import { selectAuth } from 'redux/auth/auth_selectors';
 
 const LoginForm = () => {
@@ -15,6 +21,7 @@ const LoginForm = () => {
   // const isAuth = useSelector(selectAuth);
   const navigate = useNavigate();
   const error = useSelector(selectAuthError);
+  const isLoading = useSelector(selectAuthLoading);
 
   const [state, setState] = useState({
     open: false,
@@ -59,6 +66,7 @@ const LoginForm = () => {
   };
   return (
     <Container>
+      {isLoading && <LinearProgress color="primary" />}
       {error ? (
         <Snackbar
           anchorOrigin={{ vertical, horizontal }}
