@@ -63,7 +63,7 @@ export const RegisterForm = () => {
   return (
     <Container>
       {isLoading && <LinearProgress color="primary" />}
-      {error ? (
+      {error && (
         <Snackbar
           anchorOrigin={{ vertical, horizontal }}
           open={open}
@@ -75,22 +75,22 @@ export const RegisterForm = () => {
             {error}!
           </Alert>
         </Snackbar>
-      ) : (
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={open}
-          onClose={handleClose}
-          message={error}
-          key={vertical + horizontal}
-        >
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            sx={{ width: '100%' }}
-          >
-            Success{name}! You have created an account.
-          </Alert>
-        </Snackbar>
+        // ) : (
+        //   <Snackbar
+        //     anchorOrigin={{ vertical, horizontal }}
+        //     open={open}
+        //     onClose={handleClose}
+        //     message={error}
+        //     key={vertical + horizontal}
+        //   >
+        //     <Alert
+        //       onClose={handleClose}
+        //       severity="success"
+        //       sx={{ width: '100%' }}
+        //     >
+        //       Success{name}! You have created an account.
+        //     </Alert>
+        //   </Snackbar>
       )}
       <Form onSubmit={handleSubmit}>
         <Label>

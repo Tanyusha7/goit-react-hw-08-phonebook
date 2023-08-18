@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth } from 'redux/auth/auth_selectors';
-// import { BtnOut, Text } from './UserMenu.styled';
+import { Contacts } from './UserMenu.styled';
 import { logOut } from 'redux/auth/auth_operations';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
@@ -12,6 +12,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
+import { NavHeader } from 'components/Header/Header.styled';
 
 const UserMenu = () => {
   const [auth, setAuth] = useState(true);
@@ -23,7 +24,17 @@ const UserMenu = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, justifyContent: 'flex-end' }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        width: '600px',
+        display: 'flex',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Contacts>
+        <NavHeader to="/contacts">Contact</NavHeader>
+      </Contacts>
       <Toolbar sx={{ justifyContent: 'flex-end', gap: '15px' }}>
         {auth && (
           <>

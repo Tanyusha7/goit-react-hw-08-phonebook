@@ -1,10 +1,13 @@
-import { NavHeader } from 'components/Header/Header.styled';
+import { AuthDiv, NavHeader } from 'components/Header/Header.styled';
 
 const AuthNav = () => {
   return (
     <>
-      <NavHeader to="/">Register</NavHeader>
-      <NavHeader to="/login">Login</NavHeader>
+      <NavHeader to="/">Home</NavHeader>
+      <AuthDiv>
+        <NavHeader to="/">Register</NavHeader>
+        <NavHeader to="/login">Login</NavHeader>
+      </AuthDiv>
     </>
   );
 };

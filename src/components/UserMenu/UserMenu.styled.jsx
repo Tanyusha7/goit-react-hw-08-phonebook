@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 
-export const Userr = styled.div`
-  display: inline-block;
+export const Contacts = styled.div`
+  display: flex;
+  align-items: center;
 `;
 export const Text = styled.p`
   font-size: 16px;

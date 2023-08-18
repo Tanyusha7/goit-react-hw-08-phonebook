@@ -15,7 +15,9 @@ export const Nav = styled.nav`
 
 export const NavHeader = styled(NavLink)`
   color: #e2e2ef;
+  text-decoration: none;
   &.active {
+    text-decoration: underline;
     color: #bef9fb;
   }
 `;
@@ -34,5 +36,9 @@ export const Div = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  width: 200px;
+  width: 600px;
+`;
+export const AuthDiv = styled.div`
+  display: flex;
+  gap: 20px;
 `;
